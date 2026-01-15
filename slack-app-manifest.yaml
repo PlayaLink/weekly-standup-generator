@@ -1,0 +1,47 @@
+display_information:
+  name: Weekly Standup
+  description: Generate weekly standup reports from your Jira tickets
+  background_color: "#667eea"
+  long_description: |
+    Weekly Standup helps you quickly generate formatted standup reports from your Jira tickets.
+
+    Commands:
+    • /standup-setup - Connect your Jira account and select your board
+    • /weekly-standup - Generate your weekly standup report
+
+    The report includes:
+    • Last Week - Tickets with recent activity
+    • This Week - In Progress and To Do items
+    • Blockers - Dependencies and blocked items
+
+features:
+  bot_user:
+    display_name: Standup Bot
+    always_online: true
+  slash_commands:
+    - command: /standup-setup
+      url: https://YOUR_VERCEL_DOMAIN.vercel.app/api/slack/events
+      description: Set up your Jira connection for weekly standups
+      usage_hint: Run this first to connect Jira
+      should_escape: false
+    - command: /weekly-standup
+      url: https://YOUR_VERCEL_DOMAIN.vercel.app/api/slack/events
+      description: Generate your weekly standup report
+      usage_hint: Run anytime to get your report
+      should_escape: false
+
+oauth_config:
+  scopes:
+    bot:
+      - commands
+      - chat:write
+      - im:write
+      - users:read
+
+settings:
+  interactivity:
+    is_enabled: true
+    request_url: https://YOUR_VERCEL_DOMAIN.vercel.app/api/slack/events
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  token_rotation_enabled: false
